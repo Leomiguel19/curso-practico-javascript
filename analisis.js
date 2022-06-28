@@ -1,15 +1,4 @@
-const salariosVe = venezuela.map(
-    function(personita){
-        return personita.salary;
-    }
-);
-
-const salariosVeSorted = salariosVe.sort(
-    function(salaryA, salaryB){
-        return salaryA - salaryB;
-    }
-);
-
+// Helpers
 function esPar(numerito){
     return (numerito % 2 === 0)
 }
@@ -24,6 +13,7 @@ function calcularMediaAritmetica(lista) {
     return promedioLista;
 }
 
+// Calculadora de Mediana
 function medianaSalarios(lista){
     const mitad = parseInt(lista.length / 2);
 
@@ -39,7 +29,34 @@ function medianaSalarios(lista){
     }
 }
 
-console.log(
-    medianaSalarios(salariosVeSorted)
-)
+// Mediana General
+const salariosVe = venezuela.map(
+    function(personita){
+        return personita.salary;
+    }
+);
+
+const salariosVeSorted = salariosVe.sort(
+    function(salaryA, salaryB){
+        return salaryA - salaryB;
+    }
+);
+
+const medianaGeneralVe = medianaSalarios(salariosVeSorted);
+
+// Mediana del top 10%
+const spliceStart = (salariosVeSorted.length * 90) / 100;
+const spliceCount = salariosVeSorted.length - spliceStart;
+
+const salariosVeTop10 = salariosVeSorted.splice(
+    spliceStart,
+    spliceCount
+);
+
+const medianaTop10Ve = medianaSalarios(salariosVeTop10);
+
+console.log({
+    medianaGeneralVe, 
+    medianaTop10Ve
+});
 
